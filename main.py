@@ -37,7 +37,7 @@ if __name__ == '__main__':
     window = MainWindow()
     window.show()
 
-    try:
+    try:    
         sys.exit(app.exec())
     except SystemExit:
         with open('data.json', 'w', encoding='utf-8') as f:
