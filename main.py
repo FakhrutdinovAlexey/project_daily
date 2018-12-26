@@ -6,7 +6,6 @@ from PyQt5 import uic
 from PyQt5.QtCore import QDate
 
 
-
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -39,6 +38,7 @@ class MainWindow(QMainWindow):
         number = self.listWidget.count() + 1
         self.listWidget.addItem(f'{number}) ' + text)
         date['to_do_list'].append(text)
+        self.textBrowser_2.setText('')
 
     def delete_to_do(self):
         text = self.listWidget.takeItem(self.listWidget.currentRow()).text()
@@ -48,8 +48,11 @@ class MainWindow(QMainWindow):
                 break
             else:
                 number += elem
-
         date['to_do_list'].pop(date['to_do_list'].index(text[len(number) + 1:]))
+
+        for _ in range(self.listWidget.count()):
+            self.listWidget.takeItem(0)
+        self.init_list()
 
     def init_list(self):
         for elem in date['to_do_list']:
