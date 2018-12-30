@@ -14,9 +14,17 @@ def sorting(first):
             self_date = elem + self_date
     month, day, year = self_date.split('/')
     time = year[3:]
-    year = year[:3]
+    hour, minute = time.split(':')
+    hour = int(hour) % 12
+    minute, half_of_day = minute.split(' ')
+    if half_of_day == 'AM':
+        half_of_day = 0
+    else:
+        half_of_day = 1
 
-    return tuple(map(int, [year, month, day]))
+    year = year[:2]
+
+    return tuple(map(int, [year, month, day, half_of_day, hour, minute]))
 
 
 class MainWindow(QMainWindow):
